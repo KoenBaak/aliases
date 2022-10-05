@@ -47,7 +47,7 @@ and have the same hash.
 
     >>> s.str("holland") == s.str("NL")
     True
-
+    >>>
     >>> data = {s.str("holland"): 12345}
     >>> data[s.str("nl")]
     12345
@@ -56,7 +56,7 @@ The example above already shows how alias aware strings can be used to store
 data without worrying to much about the different aliases around. However, it
 is still annoying to cast to an ``AliasAwareString`` every time manually. To
 solve this you can use the ``AliasAwareDict``. This object can be created using
-the ``dict`` method on the space. 
+the ``dict`` method on the space.
 
 .. code-block:: python
 
@@ -79,11 +79,13 @@ was the original motivation for building this package:
     0               NL        10
     1      Netherlands        11
     2          Belgium        12
+    >>>
     >>> df.assign(Country=s.map(df.Country, return_list=True))
               Country  SomeData
     0  The Netherlands        10
     1  The Netherlands        11
     2          Belgium        12
+    >>>
     >>> df.assign(Country=s.map(df.Country, return_list=True, missing=pd.NA))
                Country  SomeData
     0  The Netherlands        10
