@@ -11,7 +11,7 @@ Getting Started
 ---------------
 Keeping track of aliases in your data can be annoying. This small packages
 provides three small classes than can help you in the bookkeeping associated
-to the occurrences of aliases in your data. 
+with the occurrences of aliases in your data.
 
 The ``AliasSpace`` objects keeps track of existing aliases. As input is accepts
 a dictionary where a string (the "preferred" form) points to a list of all its
