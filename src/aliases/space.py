@@ -51,10 +51,16 @@ class AliasSpace:
             self._mapper = self.create_mapper()
         return self._mapper
 
-    def get_representative(self, string: str, missing: t.Any = _sentinel) -> t.Any:
-        result = self.mapper.get(self.preprocess(string), missing)
-        if result is _sentinel:
-            return string
+    def get_representative(
+        self, string: str, missing: t.Any = _sentinel, raise_missing: bool = False
+    ) -> t.Any:
+        result = self.mapper.get(self.preprocess(string), None)
+        if result is None:
+            if raise_missing:
+                raise KeyError(f"{string} not found in {self}")
+            if result is _sentinel:
+                return string
+            return missing
         return result
 
     def str(self, data: t.Any) -> "AliasAwareString":
