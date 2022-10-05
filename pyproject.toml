@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "aliases"
 description = "Keeping track of aliases"
-readme = "README.md"
+readme = "README.rst"
 requires-python = ">=3.10"
 license = "MIT"
 authors = [
