@@ -77,9 +77,15 @@ class AliasSpace:
         self,
         strings: t.Iterable[str],
         missing: t.Any = _sentinel,
+        raise_missing: bool = False,
         return_list: bool = False,
     ) -> map | list:
-        result = map(lambda x: self.get_representative(x, missing=missing), strings)
+        result = map(
+            lambda x: self.get_representative(
+                x, missing=missing, raise_missing=raise_missing
+            ),
+            strings,
+        )
         if return_list:
             return list(result)
         return result
