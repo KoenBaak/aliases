@@ -31,7 +31,7 @@ into ``AliasAwareString`` objects.
     <'nl' in AliasSpace>
 
 
-The preferred form of an ``AliasAwareString`` is called its _representative_
+The preferred form of an ``AliasAwareString`` is called its *representative*
 (because it represents the equivalance class of the string under the equivalance
 relation of being aliases).
 
