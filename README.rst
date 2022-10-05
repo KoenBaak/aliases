@@ -53,7 +53,7 @@ and have the same hash.
     12345
 
 The example above already shows how alias aware strings can be used to store
-data without worrying to much about the different aliases around. However, it
+data without worrying too much about the different aliases around. However, it
 is still annoying to cast to an ``AliasAwareString`` every time manually. To
 solve this you can use the ``AliasAwareDict``. This object can be created using
 the ``dict`` method on the space.
