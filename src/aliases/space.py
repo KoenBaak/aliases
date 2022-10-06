@@ -25,6 +25,19 @@ class AliasSpace:
     def case_sensitive(self) -> bool:
         return self._case_sensitive
 
+    @case_sensitive.setter
+    def case_sensitive(self, value: bool) -> None:
+        self._case_sensitive = value
+        self._mapper = self.create_mapper()
+
+    def add_alias(self, alias: str, representative: str) -> None:
+        if representative in self._aliases:
+            self._aliases[representative].append(alias)
+        else:
+            self._aliases[representative] = [alias]
+            self.mapper[self.preprocess(representative)] = representative
+        self.mapper[self.preprocess(alias)] = representative
+
     def preprocess(self, string: str) -> str:
         result: str = string
         if not self.case_sensitive:
@@ -58,7 +71,7 @@ class AliasSpace:
         if result is None:
             if raise_missing:
                 raise KeyError(f"{string} not found in {self}")
-            if result is _sentinel:
+            if missing is _sentinel:
                 return string
             return missing
         return result
@@ -89,6 +102,9 @@ class AliasSpace:
         if return_list:
             return list(result)
         return result
+
+    def __contains__(self, item: str) -> bool:
+        return self.preprocess(item) in self.mapper
 
     def __repr__(self) -> str:
         if self.name is None:
