@@ -6,6 +6,11 @@ if t.TYPE_CHECKING:
     from aliases.string import AliasAwareString
     from aliases.dict import AliasAwareDict
 
+    try:
+        import pandas as pd
+    except ImportError:
+        pass
+
 
 class AliasSpace:
     def __init__(
@@ -13,11 +18,15 @@ class AliasSpace:
         data: dict[str, list[str]],
         case_sensitive: bool = True,
         process_func: t.Callable[[str], str] | None = None,
+        pandas_process_func: t.Callable[["pd.Series"], "pd.Series"] | None = None,
         name: str | None = None,
     ) -> None:
         self._aliases = data
         self._mapper = None
+        if pandas_process_func is None and process_func is not None:
+            pandas_process_func = lambda s: s.apply(process_func)
         self._process_func = process_func or (lambda x: x)
+        self.pandas_process_func = pandas_process_func
         self._case_sensitive = case_sensitive
         self.name = name
 

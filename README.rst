@@ -20,11 +20,13 @@ into ``AliasAwareString`` objects.
 
 .. code-block:: python
 
-    >>> from aliases import AliasSpace
-    >>>
     >>> s = AliasSpace(
-    >>>     {"The Netherlands": ["NL", "Netherlands", "Holland"]},
-    >>>     case_sensitive=False
+    >>>     {
+    >>>         "The Netherlands": ["NL", "Netherlands", "Holland"],
+    >>>         "The Hague": ["Den Haag", "'s-Gravenhage"],
+    >>>         "Amsterdam": ["Adam"],
+    >>>     },
+    >>>     case_sensitive=False,
     >>> )
     >>>
     >>> s.str("nl")
@@ -64,33 +66,37 @@ the ``dict`` method on the space.
     >>> data['nl']
     12345
 
-Finally, the ``AliasAwareSpace`` object has a ``map`` method which can be used
-to find the representatives of a list of strings easily. The following example
-was the original motivation for building this package:
+Finally, when you have ``pandas`` installed, the ``aliases`` package will
+register accessors for series and dataframes. This allows you to easily enforce
+aliases in your pandas DataFrame. The following example was the original
+motivation for building this package:
 
 .. code-block:: python
 
     >>> import pandas as pd
     >>> df = pd.DataFrame(
-    >>>    {"Country": ["NL", "Netherlands", "Belgium"], "SomeData": [10, 11, 12]}
+    >>>     {
+    >>>         "Country": ["NL", "Netherlands", "Belgium"],
+    >>>         "City": ["Den Haag", "amsterdam", "Brussel"],
+    >>>         "SomeData": [10, 11, 12],
+    >>>     }
     >>> )
-    >>> df
-               Country  SomeData
-    0               NL        10
-    1      Netherlands        11
-    2          Belgium        12
+           Country       City  SomeData
+    0           NL   Den Haag        10
+    1  Netherlands  amsterdam        11
+    2      Belgium    Brussel        12
     >>>
-    >>> df.assign(Country=s.map(df.Country, return_list=True))
-              Country  SomeData
-    0  The Netherlands        10
-    1  The Netherlands        11
-    2          Belgium        12
+    >>> df.Country.alias.representative(space=s)
+    0    The Netherlands
+    1    The Netherlands
+    2            Belgium
+    Name: Country, dtype: object
     >>>
-    >>> df.assign(Country=s.map(df.Country, return_list=True, missing=pd.NA))
-               Country  SomeData
-    0  The Netherlands        10
-    1  The Netherlands        11
-    2             <NA>        12
+    >>> df.alias.representative(space=s, missing=pd.NA)
+               Country       City  SomeData
+    0  The Netherlands  The Hague        10
+    1  The Netherlands  Amsterdam        11
+    2             <NA>       <NA>        12
 
 Documentation
 -------------
