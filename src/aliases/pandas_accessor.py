@@ -5,7 +5,7 @@ import pandas as pd
 from aliases.space import AliasSpace, _sentinel
 
 
-@pd.api.extensions.register_series_accessor("alias")
+@pd.api.extensions.register_series_accessor("aliases")
 class SeriesAliasAccessor:
     def __init__(self, pandas_obj: pd.Series) -> None:
         self._obj = pandas_obj
@@ -34,7 +34,7 @@ class SeriesAliasAccessor:
         return result
 
 
-@pd.api.extensions.register_dataframe_accessor("alias")
+@pd.api.extensions.register_dataframe_accessor("aliases")
 class DataFrameAliasAccessor:
     def __init__(self, pandas_obj: pd.DataFrame) -> None:
         self._obj = pandas_obj

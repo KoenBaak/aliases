@@ -81,18 +81,19 @@ motivation for building this package:
     >>>         "SomeData": [10, 11, 12],
     >>>     }
     >>> )
+    >>> df
            Country       City  SomeData
     0           NL   Den Haag        10
     1  Netherlands  amsterdam        11
     2      Belgium    Brussel        12
     >>>
-    >>> df.Country.alias.representative(space=s)
+    >>> df.Country.aliases.representative(space=s)
     0    The Netherlands
     1    The Netherlands
     2            Belgium
     Name: Country, dtype: object
     >>>
-    >>> df.alias.representative(space=s, missing=pd.NA)
+    >>> df.aliases.representative(space=s, missing=pd.NA)
                Country       City  SomeData
     0  The Netherlands  The Hague        10
     1  The Netherlands  Amsterdam        11
