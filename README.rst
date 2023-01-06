@@ -11,7 +11,9 @@ Getting Started
 ---------------
 Keeping track of aliases in your data can be annoying. This small packages
 provides three small classes than can help you in the bookkeeping associated
-with the occurrences of aliases in your data.
+with the occurrences of aliases in your data. There are also pandas accessors 
+that make it possible to enforce aliases immediately for a whole pandas 
+Series or DataFrame.
 
 The ``AliasSpace`` objects keeps track of existing aliases. As input is accepts
 a dictionary where a string (the "preferred" form) points to a list of all its
