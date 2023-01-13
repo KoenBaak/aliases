@@ -52,7 +52,7 @@ class DataFrameAliasAccessor:
             ].values.tolist()
         return self._obj.assign(
             **{
-                col: self._obj[col].alias.representative(
+                col: self._obj[col].aliases.representative(
                     space=space, missing=missing, raise_missing=raise_missing
                 )
                 for col in columns
