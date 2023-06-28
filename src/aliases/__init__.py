@@ -1,12 +1,26 @@
-__version__ = "0.5.6"
+__version__ = "0.6.0"
 
 from aliases.space import AliasSpace
 from aliases.string import AliasAwareString
 from aliases.dict import AliasAwareDict
+from aliases.processor import StringProcessor
 
 try:
-    from aliases.pandas_accessor import AliasAccessor
+    from aliases.pandas_accessor import (
+        PandasSeriesAliasAccessor,
+        PandasDataFrameAliasAccessor,
+    )
 except ImportError:
     pass
 
-__all__ = [AliasSpace, AliasAwareDict, AliasAwareString]
+try:
+    from aliases.polars_accessor import (
+        PolarsSeriesAliasAccessor,
+        PolarsExprAliasAccessor,
+        PolarsDataFrameAliasAccessor,
+        PolarsLazyFrameAliasAccessor,
+    )
+except ImportError:
+    pass
+
+__all__ = [AliasSpace, AliasAwareDict, AliasAwareString, StringProcessor]
