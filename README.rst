@@ -15,4 +15,4 @@ Installation
 
 Documentation
 -------------
-`Here 😃 <aliases.readthedocs.io>`_
+`Here 😃 <https://aliases.readthedocs.io>`_
