@@ -59,7 +59,7 @@ class StringFunction(ABC):
         if isinstance(x, str):
             return self.handle_builtin_str(x)
         elif _has_pandas and isinstance(x, pdSeries):
-            return self.handle_polars_series(x)
+            return self.handle_pandas_series(x)
         elif _has_polars and isinstance(x, plSeries):
             return self.handle_polars_series(x)
         elif _has_polars and isinstance(x, plExpr):
