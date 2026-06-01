@@ -6,7 +6,7 @@ Aliases
 
 A very small Python package for keeping track of aliases.
 
-** This package is no longer maintained. **
+**This package is no longer maintained.**
 
 Installation
 ------------
